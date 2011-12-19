@@ -27,6 +27,14 @@ body {
   /* For modern browsers */
   /* For IE 6/7 (trigger hasLayout) */
 }
+/* line 50, ../sass/teststyle.scss */
+#container div.map-container h1 {
+  margin: 0 0 .3em;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  line-height: 1.3;
+  font-family: "Raleway";
+}
 /* line 9, ../sass/teststyle.scss */
 #container div.map-container:before, #container div.map-container:after {
   content: "";
@@ -40,24 +48,24 @@ body {
 #container div.map-container {
   zoom: 1;
 }
-/* line 52, ../sass/teststyle.scss */
+/* line 57, ../sass/teststyle.scss */
 #container fieldset {
   padding: 0;
   border: none;
   margin: 0;
 }
-/* line 60, ../sass/teststyle.scss */
+/* line 65, ../sass/teststyle.scss */
 #container .field-block {
   padding: 10px 20px;
 }
-/* line 65, ../sass/teststyle.scss */
+/* line 70, ../sass/teststyle.scss */
 #container #map_canvas {
   float: left;
   width: 718px;
   height: 384px;
   border: 1px #ddd solid;
 }
-/* line 72, ../sass/teststyle.scss */
+/* line 77, ../sass/teststyle.scss */
 #container #sidebar {
   font-family: "Raleway";
   float: left;
@@ -67,35 +75,35 @@ body {
   border: 1px #ddd solid;
   background: #fff;
 }
-/* line 73, ../sass/teststyle.scss */
+/* line 78, ../sass/teststyle.scss */
 #container #sidebar .mod-type-selector {
   border: 1px #ddd solid;
   margin: 10px;
   padding: 10px;
 }
-/* line 78, ../sass/teststyle.scss */
+/* line 83, ../sass/teststyle.scss */
 #container #sidebar h2 {
   margin: 0 0 10px;
 }
-/* line 79, ../sass/teststyle.scss */
+/* line 84, ../sass/teststyle.scss */
 #container #sidebar ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* line 80, ../sass/teststyle.scss */
+/* line 85, ../sass/teststyle.scss */
 #container #sidebar ul li {
   margin: 0;
   padding: 0;
   border-bottom: 1px #ddd dotted;
 }
-/* line 81, ../sass/teststyle.scss */
+/* line 86, ../sass/teststyle.scss */
 #container #sidebar ul li a {
   padding: 5px 10px;
   display: block;
   text-decoration: none;
 }
-/* line 91, ../sass/teststyle.scss */
+/* line 96, ../sass/teststyle.scss */
 #container #checklist {
   margin: 10px 0 0 0;
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
@@ -112,7 +120,7 @@ body {
   border: 1px #ddd solid;
   font-family: "Raleway";
 }
-/* line 95, ../sass/teststyle.scss */
+/* line 100, ../sass/teststyle.scss */
 #container #checklist input.checkbox {
   cursor: pointer;
 }
