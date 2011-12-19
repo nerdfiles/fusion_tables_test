@@ -25,9 +25,26 @@
   == -->
 
   <title>Alex Map</title>
-  <meta name="description" content="{% page_attribute meta_description %}" />
-  <meta name="keywords" content="{% page_attribute meta_keywords %}" />
-  <meta name="author" content="Bristow Group" />
+  <meta 
+    name="description" 
+    content="" />
+  <meta 
+    name="keywords" 
+    content="" />
+  <meta 
+    name="author" 
+    content="" />
+
+  <!-- ==
+  
+  custom fonts
+
+  == -->
+
+  <link 
+    href='http://fonts.googleapis.com/css?family=Raleway:100' 
+    rel='stylesheet' 
+    type='text/css'>  
 
   <!-- ==
   
@@ -35,7 +52,9 @@
 
   == -->
 
-  <link rel="stylesheet" href="_assets/css/compass/stylesheets/teststyle.css" /> 
+  <link 
+    rel="stylesheet" 
+    href="_assets/css/compass/stylesheets/teststyle.css" /> 
 
   <!-- ==
 
@@ -70,22 +89,55 @@
     <div class="line-separator"></div>
 
     <div class="map-container">
-      <div id="map_canvas"></div>
-      <div id="sidebar"></div>
+      
+      <div id="map_canvas"></div><!-- End .map_canvas -->
+
+      <div id="sidebar">
+        
+        <div class="mod mod-type-selector">
+          <div class="inner">
+            <header>
+              <h2>Test</h2>
+            </header>
+            <ul>
+              <li><a href="#">Test</a></li>
+              <li><a href="#">Test</a></li>
+              <li><a href="#">Test</a></li>
+            </ul>
+          </div>
+        </div><!-- End .mod-type-selector -->
+
+      </div><!-- End .sidebar -->
+    
     </div><!-- End .map-container -->
 
     <form 
       id="checklist"
       class=""
       action="."
-      method="post">
+      method="post"
+      tabindex="1">
       <fieldset>
         <div class="field-block field-settype">
           <!--input type="checkbox" id="tourist" onclick="toggleLayer(this,touristLayer);" checked-->
-          <input type="checkbox" id="tourist" checked="checked" />
+          <input 
+            type="checkbox" 
+            id="tourist"
+            class="type"
+            checked="checked" 
+            class="checkbox"
+            value="tourist"
+            tabindex="2" />
           <label for="tourist">Tourist</label>
           <!--input type="checkbox" id="misc" onclick="toggleLayer(this,miscLayer);" checked-->
-          <input type="checkbox" id="misc" checked="checked" />
+          <input 
+            type="checkbox" 
+            id="misc" 
+            name="type"
+            checked="checked"
+            tabindex="3"
+            class="checkbox"
+            value="misc" />
           <label for="misc">Misc</label>
         </div>
       </fieldset>

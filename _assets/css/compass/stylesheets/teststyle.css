@@ -9,7 +9,115 @@
   left: -9999px;
 }
 
-/* line 25, ../sass/teststyle.scss */
+/* line 39, ../sass/teststyle.scss */
+body {
+  background: #efefef;
+}
+
+/* line 42, ../sass/teststyle.scss */
+#container {
+  padding: 10px;
+  border: 1px #ccc solid;
+  box-shadow: 0 0 0.5em rgba(200, 200, 200, 0.6);
+  width: 960px;
+  margin: 30px auto 10px;
+}
+/* line 49, ../sass/teststyle.scss */
+#container div.map-container {
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+}
+/* line 9, ../sass/teststyle.scss */
+#container div.map-container:before, #container div.map-container:after {
+  content: "";
+  display: table;
+}
+/* line 14, ../sass/teststyle.scss */
+#container div.map-container:after {
+  clear: both;
+}
+/* line 19, ../sass/teststyle.scss */
+#container div.map-container {
+  zoom: 1;
+}
+/* line 52, ../sass/teststyle.scss */
+#container fieldset {
+  padding: 0;
+  border: none;
+  margin: 0;
+}
+/* line 60, ../sass/teststyle.scss */
+#container .field-block {
+  padding: 10px 20px;
+}
+/* line 65, ../sass/teststyle.scss */
+#container #map_canvas {
+  float: left;
+  width: 718px;
+  height: 384px;
+  border: 1px #ddd solid;
+}
+/* line 72, ../sass/teststyle.scss */
+#container #sidebar {
+  font-family: "Raleway";
+  float: left;
+  height: 385px;
+  width: 228px;
+  margin: 0 0 0 10px;
+  border: 1px #ddd solid;
+  background: #fff;
+}
+/* line 73, ../sass/teststyle.scss */
+#container #sidebar .mod-type-selector {
+  border: 1px #ddd solid;
+  margin: 10px;
+  padding: 10px;
+}
+/* line 78, ../sass/teststyle.scss */
+#container #sidebar h2 {
+  margin: 0 0 10px;
+}
+/* line 79, ../sass/teststyle.scss */
+#container #sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* line 80, ../sass/teststyle.scss */
+#container #sidebar ul li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px #ddd dotted;
+}
+/* line 81, ../sass/teststyle.scss */
+#container #sidebar ul li a {
+  padding: 5px 10px;
+  display: block;
+  text-decoration: none;
+}
+/* line 91, ../sass/teststyle.scss */
+#container #checklist {
+  margin: 10px 0 0 0;
+  background-image: -moz-linear-gradient(top, white, #d1d1d1);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
+  background-image: -o-linear-gradient(top, white, #d1d1d1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1');
+  /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+  /*Element must have a height (not auto)*/
+  /*All filters must be placed together*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1')";
+  /*Element must have a height (not auto)*/
+  /*All filters must be placed together*/
+  background-image: linear-gradient(top, #ffffff, #d1d1d1);
+  border: 1px #ddd solid;
+  font-family: "Raleway";
+}
+/* line 95, ../sass/teststyle.scss */
+#container #checklist input.checkbox {
+  cursor: pointer;
+}
+
+/*
 #container {
   width: 733px;
   height: 420px;
@@ -17,45 +125,24 @@
   position: absolute;
   padding: 0;
   margin: 0;
-  border: 0;
-}
+  border: 0; }
 
-/* line 34, ../sass/teststyle.scss */
-div.map-container {
-  /* For modern browsers */
-  /* For IE 6/7 (trigger hasLayout) */
-}
-/* line 9, ../sass/teststyle.scss */
-div.map-container:before, div.map-container:after {
-  content: "";
-  display: table;
-}
-/* line 14, ../sass/teststyle.scss */
-div.map-container:after {
-  clear: both;
-}
-/* line 19, ../sass/teststyle.scss */
-div.map-container {
-  zoom: 1;
-}
+div.map-container { 
+  @include clearfix; 
+  }
 
-/* line 38, ../sass/teststyle.scss */
 #map_canvas {
   width: 503px;
   height: 385px;
   float: left;
   margin: 0 !important;
-  position: relative;
-}
+  position: relative; }
 
-/* line 45, ../sass/teststyle.scss */
 .infowindow * {
   outline: 1px solid gold !important;
   font-size: 90%;
-  margin: 0;
-}
+  margin: 0; }
 
-/* line 50, ../sass/teststyle.scss */
 #sidebar {
   color: white;
   width: 190px;
@@ -64,6 +151,9 @@ div.map-container {
   background: #708090;
   float: left;
   border-spacing: none;
+  /*margin-top: 20px; */
   text-decoration: underline;
-  text-decoration: white;
-}
+  text-decoration: white; }
+
+#checklist {}
+*/

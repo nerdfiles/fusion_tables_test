@@ -4,24 +4,99 @@
 
 @mixin clearfix() {
 
-/* For modern browsers */
-&:before,
-&:after {
-    content:"";
-    display:table;
+  /* For modern browsers */
+  &:before,
+  &:after {
+      content:"";
+      display:table;
+  }
+
+  &:after {
+      clear:both;
+  }
+
+  /* For IE 6/7 (trigger hasLayout) */
+  & {
+      zoom:1;
+  }
+
 }
 
-&:after {
-    clear:both;
+@mixin panel_gradient() {
+background-image: -moz-linear-gradient(top, #ffffff, #d1d1d1);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#ffffff), to(#d1d1d1));
+background-image: -o-linear-gradient(top, #ffffff, #d1d1d1);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: linear-gradient(top, #ffffff, #d1d1d1);
 }
 
-/* For IE 6/7 (trigger hasLayout) */
-& {
-    zoom:1;
-}
+body {
+  background: #efefef; }
 
-}
+#container { 
+  padding: 10px;
+  border: 1px #ccc solid;
+  box-shadow: 0 0 .5em rgba(200,200,200,.6);
+  width: 960px;
+  margin: 30px auto 10px;
 
+  div.map-container { 
+    @include clearfix; }
+
+  fieldset { 
+
+    padding: 0;
+    border: none; 
+    
+    margin: 0; }
+    
+
+    .field-block { padding: 10px 20px;  }
+    .field-settype { }
+
+  label { }
+
+  #map_canvas { 
+    float: left;
+    width: 718px;
+    height: 384px;
+    border: 1px #ddd solid;
+  }
+
+  #sidebar { 
+    .mod-type-selector { 
+      border: 1px #ddd solid;
+      margin: 10px;
+      padding: 10px;
+    }
+    h2 { margin: 0 0 10px; }
+    ul { margin: 0; padding: 0; list-style: none;
+      li { 
+        a { padding: 5px 10px; display: block; text-decoration: none; } margin: 0; padding: 0; border-bottom: 1px #ddd dotted; } }
+    font: {
+      family: "Raleway"; }
+    float: left;
+    height: 385px;
+    width: 228px;
+    margin: 0 0 0 10px;
+    border: 1px #ddd solid;
+    background: #fff; }
+
+  #checklist { 
+    margin: 10px 0 0 0;
+    @include panel_gradient;
+    border: 1px #ddd solid;
+    input.checkbox { cursor: pointer; }
+    font: { 
+      family: "Raleway"; } } }
+
+/*
 #container {
   width: 733px;
   height: 420px;
@@ -60,4 +135,5 @@ div.map-container {
   text-decoration: white; }
 
 #checklist {}
+*/
 
