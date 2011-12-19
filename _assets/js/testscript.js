@@ -20,7 +20,7 @@ function initialize() {
         styles: alexMapStyle,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById("map_canvas"),
+    map = new google.maps.Map($("#map_canvas")[0],
         myOptions);
 
     touristLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
@@ -30,7 +30,7 @@ function initialize() {
     touristLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Tourist'");
     touristLayer.setMap(map);
     addClickHandler(touristLayer);
-
+    
     miscLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
       suppressInfoWindows: true });
     miscLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Misc'");
@@ -107,7 +107,6 @@ var alexMapStyle = [
   
 ];
 
-google.load('visualization', '1', {'packages':['corechart', 'table', 'geomap']});
 
 function createSidebar() {
     // https://www.google.com/fusiontables/api/query?sql=SELECT%20ROWID,%20%2A%20FROM%20564705
@@ -121,8 +120,6 @@ function createSidebar() {
     //set the callback function
     query.send(getData);
 }
-
-google.setOnLoadCallback(createSidebar);
 
 
 function getData(response) {
@@ -225,8 +222,15 @@ function myFTclick(row) {
 
 
 function addClickHandler(FTLayer) {
+<<<<<<< HEAD
     google.maps.event.addListener(FTLayer, "click", function(event) {
         //console.log(FTLayer);
+=======
+  var FTLayer = FTLayer;
+
+        console.log(FTLayer);
+    google.maps.event.addListener(FTLayer, "click", function(event) {
+>>>>>>> master
         if (infoWindow) infoWindow.close();
         infoWindow.setOptions({pixelOffset:null,
             content:event.infoWindowHtml,
@@ -242,48 +246,24 @@ function addClickHandler(FTLayer) {
   var mapThing = {
 
     toggleLayer: function() {
-      $('checkbox').bind('change', function(e) {
+      $('input[type="checkbox"]').bind('change', function(e) {
         var $elem = $(this);
-        //console.log( $elem.attr('checked') );
-        /*
-        var latlng = new google.maps.LatLng(31.22, 29.85);
-        var myOptions = {
-            zoom: 11,
-            streetViewControl: false,
-            zoomControl: true,
-            zoomControlOptions:{
-                style: google.maps.ZoomControlStyle.DEFAULT,
-                position: google.maps.ControlPosition.LEFT_CENTER
-            },
-            scaleControl: false,
-            panControl: false,
-            center: latlng,
-            styles: alexMapStyle,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map($("#map_canvas"),
-            myOptions);
-        */
-        //var miscLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
-        //  suppressInfoWindows: true
-        //});
-        //miscLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Misc'");
-        //miscLayer.setMap(map);
-        //console.log(miscLayer);
-        //console.log($('body').data('map'));
-        toggleLayer($elem, miscLayer);
       });
     },
 
     init: function() {
-      
-      this.toggleLayer();
 
+      this.toggleLayer();
+      google.load('visualization', '1', {'packages':['corechart', 'table', 'geomap']});
+      google.setOnLoadCallback(createSidebar);
       //initialize();
+
     }
 
   };
 
-  mapThing.init();
+  mapThing.init();initialize();
 
 })(jQuery);
+
+
