@@ -7,7 +7,6 @@ var Marker_TableID = 2441665;
 function initialize() {
     var latlng = new google.maps.LatLng(31.22, 29.85);
     var myOptions = {
-        singleInfoWindow: false,
         zoom: 11,
         streetViewControl: false,
         zoomControl: true,
@@ -227,7 +226,7 @@ function myFTclick(row) {
 
 function addClickHandler(FTLayer) {
     google.maps.event.addListener(FTLayer, "click", function(event) {
-        console.log(FTLayer);
+        //console.log(FTLayer);
         if (infoWindow) infoWindow.close();
         infoWindow.setOptions({pixelOffset:null,
             content:event.infoWindowHtml,
