@@ -1,4 +1,4 @@
-var map, touristLayer, miscLayer, FTresponse, geocoder;
+var map, gmarkers, touristLayer, miscLayer, FTresponse, geocoder;
 var infoWindow;
 var query = "";
 var info = null;
@@ -54,7 +54,7 @@ function toggleLayer(checkbox, layer) {
     var className = $(checkbox).next().text();
 
     if (checkbox.checked) {
-        console.log( $sidebar.find('.'+className) );
+        //console.log( $sidebar.find('.'+className) );
         $sidebar.find('.'+className).removeClass('hide');
         $info_window.removeClass('hide');
         layer.setMap(map);
@@ -184,7 +184,7 @@ function openInfoWindowGeocoded(address, name, description) {
 
 function openFtInfoWindow(position, name, description) {
      // Set up and create the infowindow
-     if (!infoWindow) infoWindow = new google.maps.InfoWindow({});
+     if (!infoWindow) infoWindow = new google.maps.InfoWindow();
      var content = '<div class="FT_infowindow">' + name;
      if (description)  content += '<br>'+description;
 
@@ -196,6 +196,8 @@ function openFtInfoWindow(position, name, description) {
 
      // Infowindow-opening event handler
      infoWindow.open(map);
+
+     //map.trigger(position, name, description);
 }
 
 function myFTclick(row) {
@@ -203,7 +205,9 @@ function myFTclick(row) {
    var description = FTresponse.getDataTable().getValue(row,2);
    var latlng =  FTresponse.getDataTable().getValue(row,1);
 
-    //console.log( name );
+  //console.log( google.maps.Markers );
+  //console.log( map.b.children );
+  //console.log(map.markers)
 
    if (latlng.indexOf("<") === -1) {
      var coords = latlng.split(',');
@@ -223,6 +227,7 @@ function myFTclick(row) {
 
 function addClickHandler(FTLayer) {
     google.maps.event.addListener(FTLayer, "click", function(event) {
+        console.log(FTLayer);
         if (infoWindow) infoWindow.close();
         infoWindow.setOptions({pixelOffset:null,
             content:event.infoWindowHtml,
