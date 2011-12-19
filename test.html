@@ -1,43 +1,126 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en">
+<!--[if lt IE 7]><html class="ie6 no-js" lang="en"><![endif]-->
+<!--[if IE 7]><html class="ie7 no-js" lang="en"><![endif]-->
+<!--[if IE 8]><html class="ie8 no-js" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
 <head>
+  
+  <meta charset="utf-8" /><!-- == charset first == -->
+
+  <!-- ==
+  
+  device stuff
+
+  == -->
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+
+  <!-- ==
+
+  seo stuff
+
+  == -->
+
   <title>Alex Map</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <meta name="description" content="{% page_attribute meta_description %}" />
+  <meta name="keywords" content="{% page_attribute meta_keywords %}" />
+  <meta name="author" content="Bristow Group" />
+
+  <!-- ==
+  
+  stylin'
+
+  == -->
+
+  <link rel="stylesheet" href="_assets/css/compass/stylesheets/teststyle.css" /> 
+
+  <!-- ==
+
+  gmap
+
+  -->
+
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-  <script type="text/javascript"
-      src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="_assets/js/testscript.js"></script>
-  <link rel="stylesheet" href="_assets/css/compass/stylesheets/teststyle.css">
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+  <!-- ==
+  
+  script loader (modernizr)
+
+  == -->
+  
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+  <script>
+      try { 
+          window.Modernizr || document.write('<script src="_assets/js-lib/modernizr.min.js"><\/script>'); 
+      } catch(e) { 
+          // window.log(e);
+      }
+  </script>
 
 </head>
 
-<body onload="initialize();"> 
+<body id="maptest"> 
 
   <div id="container">
+    
     <div class="line-separator"></div>
+
     <div class="map-container">
       <div id="map_canvas"></div>
       <div id="sidebar"></div>
     </div><!-- End .map-container -->
-    <ul style="" id="checklist">
-      <li>
-        <input type="checkbox" id="tourist" onclick="toggleLayer(this,touristLayer);" checked>
-        <!--input type="checkbox" id="tourist" checked-->
-        <label for="tourist">Tourist</label>
-      </li>
-      <li>
-        <input type="checkbox" id="misc" onclick="toggleLayer(this,miscLayer);" checked>
-        <!--input type="checkbox" id="misc" checked-->
-        <label for="misc">Misc</label>
-      </li>
-    </ul><!-- End #checklist -->
+
+    <form 
+      id="checklist"
+      class=""
+      action="."
+      method="post">
+      <fieldset>
+        <div class="field-block field-settype">
+          <!--input type="checkbox" id="tourist" onclick="toggleLayer(this,touristLayer);" checked-->
+          <input type="checkbox" id="tourist" checked="checked" />
+          <label for="tourist">Tourist</label>
+          <!--input type="checkbox" id="misc" onclick="toggleLayer(this,miscLayer);" checked-->
+          <input type="checkbox" id="misc" checked="checked" />
+          <label for="misc">Misc</label>
+        </div>
+      </fieldset>
+    </form><!-- End #checklist -->
+
   </div><!-- End #container -->
 
+  <script>
+    Modernizr.load([
+      {
+        load: [
+          'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js', 
+          'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
+          //'http://www.google.com/jsapi',
+          //'http://maps.google.com/maps/api/js?sensor=false',
+          //'_assets/js-lib/jquery-waypoints/waypoints.min.js',
+          //'_assets/js/testscript.js',
+        ],
+        complete: function () {
+          if ( !window.jQuery ) {
+            Modernizr.load('_assets/js-lib/jquery/1.7/jquery.min.js');
+          }
 
-  <script type="text/javascript" src="_assets/js/testscript.js"></script>
+          if ( !window.jQuery.ui ) {
+            Modernizr.load('_assets/js-lib/jqueryui/1.8.16/jquery-ui.min.js');
+          }
+
+          $('body').data('SITE_URL', location.hostname);
+        
+          Modernizr.load('_assets/js/testscript.js');
+
+        }
+      }
+    ]);
+  </script>
 
 </body>
 </html>
