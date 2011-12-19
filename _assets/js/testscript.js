@@ -7,6 +7,7 @@ var Marker_TableID = 2441665;
 function initialize() {
     var latlng = new google.maps.LatLng(31.22, 29.85);
     var myOptions = {
+        singleInfoWindow: false,
         zoom: 11,
         streetViewControl: false,
         zoomControl: true,
@@ -23,12 +24,16 @@ function initialize() {
     map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
 
-    touristLayer = new google.maps.FusionTablesLayer(Marker_TableID, {suppressInfoWindows:true});
+    touristLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
+      suppressInfoWindows: true });
+
+    //console.log(touristLayer);
     touristLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Tourist'");
     touristLayer.setMap(map);
     addClickHandler(touristLayer);
 
-    miscLayer = new google.maps.FusionTablesLayer(Marker_TableID, {suppressInfoWindows:true});
+    miscLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
+      suppressInfoWindows: true });
     miscLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Misc'");
     miscLayer.setMap(map);
     addClickHandler(miscLayer);
@@ -41,18 +46,20 @@ function initialize() {
 
 
 function toggleLayer(checkbox, layer) {
-    
-    var $sidebar = $("#sidebar");
-    var $info_window = $(".googft-info-window");
 
-    console.log( $info_window );
+    var $sidebar = $("#sidebar"),
+        $info_window = $(".googft-info-window");
+
+    //console.log( $info_window );
+    var className = $(checkbox).next().text();
 
     if (checkbox.checked) {
-        $sidebar.removeClass('hide');
+        console.log( $sidebar.find('.'+className) );
+        $sidebar.find('.'+className).removeClass('hide');
         $info_window.removeClass('hide');
         layer.setMap(map);
     } else {
-        $sidebar.addClass('hide');
+        $sidebar.find('.'+className).addClass('hide');
         $info_window.addClass('hide');
         layer.setMap(null);
     }
@@ -116,7 +123,7 @@ function createSidebar() {
     query.send(getData);
 }
 
-    google.setOnLoadCallback(createSidebar);
+google.setOnLoadCallback(createSidebar);
 
 
 function getData(response) {
@@ -196,7 +203,7 @@ function myFTclick(row) {
    var description = FTresponse.getDataTable().getValue(row,2);
    var latlng =  FTresponse.getDataTable().getValue(row,1);
 
-    console.log( name );
+    //console.log( name );
 
    if (latlng.indexOf("<") === -1) {
      var coords = latlng.split(',');
@@ -231,7 +238,7 @@ function addClickHandler(FTLayer) {
   var mapThing = {
 
     toggleLayer: function() {
-      $('#misc').bind('change', function(e) {
+      $('checkbox').bind('change', function(e) {
         var $elem = $(this);
         //console.log( $elem.attr('checked') );
         /*
@@ -253,11 +260,11 @@ function addClickHandler(FTLayer) {
         map = new google.maps.Map($("#map_canvas"),
             myOptions);
         */
-        var miscLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
-          //suppressInfoWindows: false
-        });
-        miscLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Misc'");
-        miscLayer.setMap(map);
+        //var miscLayer = new google.maps.FusionTablesLayer(Marker_TableID, {
+        //  suppressInfoWindows: true
+        //});
+        //miscLayer.setQuery("SELECT Lat FROM " + Marker_TableID + " WHERE Type LIKE 'Misc'");
+        //miscLayer.setMap(map);
         //console.log(miscLayer);
         //console.log($('body').data('map'));
         toggleLayer($elem, miscLayer);
