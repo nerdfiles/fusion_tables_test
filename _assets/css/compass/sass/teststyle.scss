@@ -1,0 +1,63 @@
+.hide { display: none ; }
+.accessiblyHide { position: absolute; left: -9999px; }
+
+
+@mixin clearfix() {
+
+/* For modern browsers */
+&:before,
+&:after {
+    content:"";
+    display:table;
+}
+
+&:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+& {
+    zoom:1;
+}
+
+}
+
+#container {
+  width: 733px;
+  height: 420px;
+  background: black;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+div.map-container { 
+  @include clearfix; 
+  }
+
+#map_canvas {
+  width: 503px;
+  height: 385px;
+  float: left;
+  margin: 0 !important;
+  position: relative; }
+
+.infowindow * {
+  outline: 1px solid gold !important;
+  font-size: 90%;
+  margin: 0; }
+
+#sidebar {
+  color: white;
+  width: 190px;
+  height: 385px;
+  font-size: 11px;
+  background: #708090;
+  float: left;
+  border-spacing: none;
+  //margin-top: 20px;
+  text-decoration: underline;
+  text-decoration: white; }
+
+#checklist {}
+
