@@ -222,16 +222,10 @@ function myFTclick(row) {
 
 
 function addClickHandler(FTLayer) {
-<<<<<<< HEAD
-    google.maps.event.addListener(FTLayer, "click", function(event) {
-        //console.log(FTLayer);
-=======
   var FTLayer = FTLayer;
-
-        console.log(FTLayer);
-    google.maps.event.addListener(FTLayer, "click", function(event) {
->>>>>>> master
-        if (infoWindow) infoWindow.close();
+  console.log(FTLayer);
+  google.maps.event.addListener(FTLayer, "click", function(event) {
+  if (infoWindow) infoWindow.close();
         infoWindow.setOptions({pixelOffset:null,
             content:event.infoWindowHtml,
             position:event.latLng
