@@ -1,10 +1,11 @@
-;(function($) {
+//;(function($) {
   
   var map, gmarkers, touristLayer, miscLayer, FTresponse, geocoder;
   var infoWindow;
   var query = "";
   var info = null;
   var Marker_TableID = 2441665;
+  var mrkr_array = [];
 
   /*
   function initialize() {
@@ -136,20 +137,27 @@
     numCols = response.getDataTable().getNumberOfColumns();
 
     //concatenate the results into a string, you can build a table here
-    var $fusiontabledata = $('<table />');
+    var $fusiontabledata = $('<ul />');
         
-    $fusiontabledata.append('<thead><tr><th>' + response.getDataTable().getColumnLabel(0) + '</th></tr></thead>');
-    $fusiontabledata.append('<tbody />');
+    $fusiontabledata.append('<header><h2>' + response.getDataTable().getColumnLabel(0) + '</h2></header>');
 
+    var html = [];
     //FT_infowindow
     for(i = 0; i < numRows; i++) {
-      //$fusiontabledata.find('tbody').append('<tr><td class="' + response.getDataTable.getValue(i, 3) + '"><td><a href="javascript:myFTclick('+i+')">'+response.getDataTable().getValue(i, 0) + '</a></td></tr>');
+      //console.log( response.getDataTable().getValue(i, 3) );
+      html.push('<li class="' + response.getDataTable().getValue(i, 3) + '"><td><a href="#" data-markerid="'+i+'">'+response.getDataTable().getValue(i, 0) + '</a></li>');
+      var ll_array = response.getDataTable().getValue(i,1).toString().split(" ");
+      var latlng = new google.maps.LatLng(ll_array[0], ll_array[1]);
+      var mrkr = new google.maps.Marker({
+        position: latlng
+      });
+      mrkr_array.push(mrkr);
     }
 
-    console.log( $fusiontabledata );
+    $fusiontabledata.append( html.join('') );
 
     //display the results on the page
-    //$('sidebar').prepend( $fusiontabledata );
+    $('#sidebar > div.mod-type-selector > div.inner').append( $fusiontabledata );
 
   } // End getData
 
@@ -178,6 +186,7 @@
        if (!infoWindow) infoWindow = new google.maps.InfoWindow();
        var content = '<div class="FT_infowindow">' + name;
        if (description)  content += '<br>'+description;
+       //console.log( infoWindow );
 
        infoWindow.setOptions({
          content: content,
@@ -188,36 +197,11 @@
        // Infowindow-opening event handler
        infoWindow.open(map);
 
-       //map.trigger(position, name, description);
+       //google.maps.event.trigger(map, 'click');
        
   } // End openFtInfoWindow
 
-  function myFTclick(row) {
-
-     var name = FTresponse.getDataTable().getValue(row,0);
-     var description = FTresponse.getDataTable().getValue(row,2);
-     var latlng =  FTresponse.getDataTable().getValue(row,1);
-
-     if ( latlng.indexOf("<") === -1 ) {
-
-       var coords = latlng.split(',');
-       var lat = parseFloat(coords[0]);
-       var lng = parseFloat(coords[1]);
-
-       if (isNaN(lat) || isNaN(lng)) {
-         // assume address, send to geocoder
-         openInfoWindowGeocoded(latlng, name, description);
-       }
-
-       var position = new google.maps.LatLng(lat,lng);
-
-       openFtInfoWindow(position, name, description);
-
-     }
-
-  } // End myFTclick
-
-
+/*
   function addClickHandler(FTLayer) {
 
     var FTLayer = FTLayer;
@@ -230,7 +214,7 @@
 
     infoWindow.setOptions({
         pixelOffset:null,
-        content:event.infoWindowHtml,
+        //content:event.infoWindowHtml,
         position:event.latLng
     });
 
@@ -239,8 +223,9 @@
     });
 
   } // End func addClickHandler
+*/
 
-
+/*
   function toggleLayer(checkbox, layer) {
 
       var $sidebar = $("#sidebar"),
@@ -261,6 +246,7 @@
       }
 
   } // End toggleLayer
+*/
 
   var mapThing = {
 
@@ -270,9 +256,49 @@
       });
     },
 
+    openMarkers: function() {
+
+      $('#sidebar a').live('click', function(e) {
+        e.preventDefault();
+
+        var $this = $(this),
+            row = $this.data('markerid'),
+            row = parseInt( row, 10 );
+        var name = FTresponse.getDataTable().getValue(row,0);
+        var description = FTresponse.getDataTable().getValue(row,2);
+        var latlng =  FTresponse.getDataTable().getValue(row,1);
+
+        //if ( latlng.indexOf("<") === -1 ) {
+
+        var coords = latlng.split(',');
+        var lat = parseFloat(coords[0]);
+        var lng = parseFloat(coords[1]);
+
+        if (isNaN(lat) || isNaN(lng)) {
+        // assume address, send to geocoder
+          openInfoWindowGeocoded(latlng, name, description);
+        }
+
+        var position = new google.maps.LatLng(lat,lng);
+
+        //console.log( position );
+        console.log( position );
+        console.log( name );
+        console.log( description );
+        console.log( map );
+        //console.log( FTlayer );
+        //openFtInfoWindow(position, name, description);
+
+        //}
+
+      });
+
+    },
+
     init: function() {
 
-      this.toggleLayer();
+      //this.toggleLayer();
+      this.openMarkers();
       //initialize();
 
       var latlng = new google.maps.LatLng(31.22, 29.85);
@@ -292,27 +318,41 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
       };
 
-      $('#map_canvas').gmap(myOptions).bind('init', function() {
+      map = $('#map_canvas').gmap(myOptions).bind('init', function() {
+
         $('#map_canvas').gmap(
           'loadFusion', 
             { 
               'query': { 
                 'select': 'Lat', 
                 'from': Marker_TableID, 
-                'where': 'Type LIKE "Tourist"' } } );
-        $('#map_canvas').gmap(
+                'where': 'Type LIKE "Eat"' } } );
+        /*$('#map_canvas').gmap(
           'loadFusion', 
             { 
               'query': { 
                 'select': 'Lat', 
                 'from': Marker_TableID, 
-                'where': 'Type LIKE "Misc"' } } );
+                'where': 'Type LIKE "Experience"' } } );*/
         var queryText = encodeURIComponent("SELECT 'Name', 'Lat', 'Description', 'Type' FROM " + Marker_TableID );             
-        console.log( queryText );
+        //console.log( queryText );
         var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='+queryText);
-        console.log ( query );
+        //console.log ( query );
         query.send(getData);
         //var q = query.send(getData);
+        
+        //console.log( map.markers );
+        //map.trigger(map.markers[2].marker, 'click');
+
+        
+        //$('#map_canvas').gmap('findMarker', 'Type', 'Eat', false, function(marker, found) {
+            //if ( found ) {
+                //marker.setVisible(false);
+            //} else {
+                //marker.setVisible(false);
+            //}
+        //});
+        
 
       });
 
@@ -324,6 +364,6 @@
   
   //initialize();
       
-})(jQuery);
+//})(jQuery);
 
 
