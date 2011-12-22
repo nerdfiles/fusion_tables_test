@@ -8,7 +8,7 @@ djcelery.setup_loader()
 
 gettext = lambda s: s
 
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+PROJECT_DIR = os.path.dirname(__file__)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -56,11 +56,17 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+THEME = "vanilla"
+THEME_DIR = os.path.join(PROJECT_DIR, "_themes", THEME)
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_DIR, '_themes/vanilla/_assets')
+#MEDIA_ROOT = os.path.join(PROJECT_DIR, '_themes/vanilla/_assets')
+MEDIA_ROOT = os.path.realpath(os.path.join(THEME_DIR, "_assets"))
+MEDIA_PATH = MEDIA_ROOT # for editor settings.MEDIA_PATH + "jquery.treeTable.css", error
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
+#STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
+STATIC_ROOT = os.path.realpath(os.path.join(PROJECT_DIR, "_static"))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -72,7 +78,8 @@ STATIC_URL = '/_static/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/_static/admin/'
+#ADMIN_MEDIA_PREFIX = '/_static/admin/'
+ADMIN_MEDIA_PREFIX = '%sadmin/' % MEDIA_URL
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0r6%7gip5tmez*vygfv+u14h@4lbt^8e2^26o#5_f_#b7%cm)u'
@@ -107,6 +114,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'sekizai.context_processors.sekizai',
 )
 
+if DEBUG:
+  TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.debug',)
+if USE_I18N:
+  TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.i18n',)
+
 CMS_TEMPLATES = (
     ('test.html', 'Test Template'),
 )
@@ -122,7 +134,7 @@ THUMBNAIL_PROCESSORS = (
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, '_themes/vanilla/_templates'),
+  os.path.join(PROJECT_DIR, "_themes", THEME, "_templates"),
 )
 
 INSTALLED_APPS = (
@@ -148,6 +160,7 @@ INSTALLED_APPS = (
     'south',
     'fixture_magic',
     'fixture_generator',
+    'django_evolution',
 
     # additional content plugins
     'cms.plugins.text',
@@ -165,6 +178,7 @@ INSTALLED_APPS = (
 
     # file uploading
     'filer',
+    'easy_thumbnails',
 
     # testing
     'django_pdb',
@@ -177,15 +191,27 @@ INSTALLED_APPS += ("djcelery",)
 if DEBUG:
   INSTALLED_APPS += ("debug_toolbar",)
 
-DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.version.VersionDebugPanel',
-    'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-    'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    'debug_toolbar.panels.template.TemplateDebugPanel',
-    'debug_toolbar.panels.sql.SQLDebugPanel',
-    'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
-)
+  DEBUG_TOOLBAR_PANELS = (
+      'debug_toolbar.panels.version.VersionDebugPanel',
+      'debug_toolbar.panels.timer.TimerDebugPanel',
+      'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+      'debug_toolbar.panels.headers.HeaderDebugPanel',
+      'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+      'debug_toolbar.panels.template.TemplateDebugPanel',
+      'debug_toolbar.panels.sql.SQLDebugPanel',
+      'debug_toolbar.panels.signals.SignalDebugPanel',
+      'debug_toolbar.panels.logger.LoggingPanel',
+  )
+
+  def custom_show_toolbar(request):
+      return True # Always show toolbar, for example purposes only.
+
+  DEBUG_TOOLBAR_CONFIG = {
+      'INTERCEPT_REDIRECTS': False,
+      'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+      #'EXTRA_SIGNALS': ['myproject.signals.MySignal'],
+      'MEDIA_URL': STATIC_URL + 'debug_toolbar/',
+      'HIDE_DJANGO_SQL': False,
+      'TAG': 'div',
+  }
 

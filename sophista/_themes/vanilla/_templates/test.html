@@ -1,5 +1,28 @@
 ﻿{% load cms_tags sekizai_tags %}
-<!doctype html>
+
+{% block js_base %}
+{% addtoblock "js" %}
+{% include "js-base.tmpl" %}
+{% endaddtoblock %}
+{% endblock %}
+
+{% block js_analytics %}
+{% addtoblock "js" %}
+{% include "js-analytics.tmpl" %}
+{% endaddtoblock %}
+{% endblock %}
+
+{% block js_scriptloader %}
+{% addtoblock "js_scriptloader" %}
+{% include "js-scriptloader.tmpl" %}
+{% endaddtoblock %}
+{% endblock %}
+
+{% block css_base %}
+{% addtoblock "css" %}
+{% include "css-base.tmpl" %}
+{% endaddtoblock %}
+{% endblock %}
 
 <!DOCTYPE html>
 
@@ -69,12 +92,6 @@
   == -->
 
   {% render_block "css" %}
-  <link 
-    rel="stylesheet" 
-    href="_assets/css/compass/stylesheets/reset.css" /> 
-  <link 
-    rel="stylesheet" 
-    href="_assets/css/compass/stylesheets/teststyle.css" /> 
 
   <!-- ==
   
@@ -101,15 +118,8 @@
   script loader (modernizr)
 
   == -->
-  
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
-  <script>
-      try { 
-          window.Modernizr || document.write('<script src="_assets/js-lib/modernizr.min.js"><\/script>'); 
-      } catch(e) { 
-          // window.log(e);
-      }
-  </script>
+
+  {% render_block "js_scriptloader" %}
 
 </head>
 
@@ -125,7 +135,9 @@
 
       <h1>Map test</h1>
 
+      <div class="page-content">
       {% placeholder "page content" %}
+      </div>
 
       <div id="map_canvas"></div><!-- End .map_canvas -->
 
@@ -151,25 +163,9 @@
       tabindex="1">
       <fieldset>
         <div class="field-block field-settype">
-          <!--input type="checkbox" id="tourist" onclick="toggleLayer(this,touristLayer);" checked-->
-          <!--input 
-            type="checkbox" 
-            id="tourist"
-            checked="checked" 
-            class="type checkbox"
-            value="tourist"
-            tabindex="2" />
-          <label for="tourist">Tourist</label-->
-          <!--input type="checkbox" id="misc" onclick="toggleLayer(this,miscLayer);" checked-->
-          <!--input 
-            type="checkbox" 
-            id="misc" 
-            name="type"
-            checked="checked"
-            tabindex="3"
-            class="type checkbox"
-            value="misc" />
-          <label for="misc">Misc</label-->
+          <!-- loaded by js -->
+          <!-- should be loaded by app, instead of using js -->
+          <!-- so that HTML content appears in View Source -->
         </div>
       </fieldset>
     </form><!-- End #checklist -->
@@ -178,41 +174,7 @@
 
   {% render_block "js" %}
 
-  <script>
-    Modernizr.load([
-      {
-        load: [
-          'http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js', 
-          'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
-          '_assets/js-lib/jquery.ui.map.full.min.js',
-          //'http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.full.min.js',
-          //'http://www.google.com/jsapi',
-          //'http://maps.google.com/maps/api/js?sensor=false',
-          //'_assets/js-lib/jquery-waypoints/waypoints.min.js',
-          //'_assets/js/testscript.js',
-        ],
-        complete: function () {
-          if ( !window.jQuery ) {
-            Modernizr.load('_assets/js-lib/jquery/1.7/jquery.min.js');
-          }
-
-          if ( !window.jQuery.ui ) {
-            Modernizr.load('_assets/js-lib/jqueryui/1.8.16/jquery-ui.min.js');
-          }
-
-          $('body').data('SITE_URL', location.hostname);
-        
-          Modernizr.load('_assets/js/testscript.js');
-
-        }
-      }
-    ]);
-  </script>
-
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-    <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-  <![endif]-->
+  {% render_block "js_analytics" %}
 
 </body>
 </html>

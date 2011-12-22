@@ -1,39 +1,50 @@
-/* line 7, ../sass/teststyle.scss */
+/* line 9, ../sass/teststyle.scss */
 .hide {
   display: none !important;
 }
 
-/* line 8, ../sass/teststyle.scss */
+/* line 10, ../sass/teststyle.scss */
 .accessiblyHide {
   position: absolute;
   left: -9999px;
 }
 
-/* line 85, ../sass/teststyle.scss */
+/* line 88, ../sass/teststyle.scss */
+*::focus,
+*::active {
+  outline: none !important;
+}
+
+/* line 91, ../sass/teststyle.scss */
+fieldset {
+  outline: none !important;
+}
+
+/* line 93, ../sass/teststyle.scss */
 h2.tooltip-header {
   font-size: 16px;
   margin: 0;
   font-family: "Helvetica", sans-serif;
 }
 
-/* line 89, ../sass/teststyle.scss */
+/* line 97, ../sass/teststyle.scss */
 p.tooltip-desc {
   font-family: "Helvetica", sans-serif;
   font-size: 12px;
 }
 
-/* line 93, ../sass/teststyle.scss */
+/* line 101, ../sass/teststyle.scss */
 body {
   background: #efefef;
 }
 
-/* line 95, ../sass/teststyle.scss */
+/* line 103, ../sass/teststyle.scss */
 h1, h2 {
   margin: 0;
   padding: 0;
 }
 
-/* line 97, ../sass/teststyle.scss */
+/* line 105, ../sass/teststyle.scss */
 #container {
   border: 1px #ccc solid;
   box-shadow: 0 0 0.5em rgba(200, 200, 200, 0.6);
@@ -46,13 +57,66 @@ h1, h2 {
   top: 20px;
   background: #efefef;
 }
-/* line 108, ../sass/teststyle.scss */
+/* line 116, ../sass/teststyle.scss */
+#container .page-content {
+  margin: 0 10px;
+}
+/* line 120, ../sass/teststyle.scss */
 #container div.map-container {
   margin: 10px 0 0;
   /* For modern browsers */
   /* For IE 6/7 (trigger hasLayout) */
 }
-/* line 110, ../sass/teststyle.scss */
+/* line 126, ../sass/teststyle.scss */
+#container div.map-container ul.cms_placeholder-subnav {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
+  -khtml-border-radius: 0;
+  border-radius: 0;
+  border: 1px #ccc dotted;
+}
+/* line 134, ../sass/teststyle.scss */
+#container div.map-container ul.cms_placeholder-subnav li.cms_placeholder-subnav-title ul li {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+/* line 136, ../sass/teststyle.scss */
+#container div.map-container ul.cms_placeholder-subnav li.cms_placeholder-subnav-title ul li:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+/* line 138, ../sass/teststyle.scss */
+#container div.map-container ul.cms_placeholder-subnav li.cms_placeholder-subnav-title ul li a {
+  color: #333;
+  font-weight: 600;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 16px;
+}
+/* line 144, ../sass/teststyle.scss */
+#container div.map-container ul.cms_placeholder-subnav li.cms_placeholder-subnav-title ul li a:hover {
+  color: #333 !important;
+  background: #fff;
+}
+/* line 148, ../sass/teststyle.scss */
+#container div.map-container li.cms_placeholder-subnav-title span {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
+  -khtml-border-radius: 0;
+  border-radius: 0;
+  color: #333;
+  font-weight: 600;
+  text-transform: lowercase;
+  border-bottom: 1px #999 dotted;
+  font-variant: small-caps;
+  font-size: 16px;
+  text-shadow: 0 0 -1px #111111;
+}
+/* line 161, ../sass/teststyle.scss */
 #container div.map-container h1 {
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
   background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
@@ -77,30 +141,30 @@ h1, h2 {
   line-height: 1;
   font-family: "Helvetica", sans-serif;
 }
-/* line 55, ../sass/teststyle.scss */
+/* line 57, ../sass/teststyle.scss */
 #container div.map-container:before, #container div.map-container:after {
   content: "";
   display: table;
 }
-/* line 60, ../sass/teststyle.scss */
+/* line 62, ../sass/teststyle.scss */
 #container div.map-container:after {
   clear: both;
 }
-/* line 65, ../sass/teststyle.scss */
+/* line 67, ../sass/teststyle.scss */
 #container div.map-container {
   zoom: 1;
 }
-/* line 124, ../sass/teststyle.scss */
+/* line 175, ../sass/teststyle.scss */
 #container fieldset {
   padding: 0;
   border: none;
   margin: 0;
 }
-/* line 132, ../sass/teststyle.scss */
+/* line 183, ../sass/teststyle.scss */
 #container .field-block {
   padding: 10px 20px;
 }
-/* line 137, ../sass/teststyle.scss */
+/* line 188, ../sass/teststyle.scss */
 #container #map_canvas {
   float: left;
   width: 718px;
@@ -108,53 +172,54 @@ h1, h2 {
   min-height: 400px;
   border: 1px #ddd solid;
   border-left: none;
+  margin: 10px 0 0;
 }
-/* line 147, ../sass/teststyle.scss */
+/* line 199, ../sass/teststyle.scss */
 #container #sidebar {
   font-family: "Helvetica", sans-serif;
   float: left;
   width: 231px;
-  margin: 0 0 0 10px;
+  margin: 10px 0 0 10px;
   border: 1px #ddd solid;
   border-right: 0;
   background: #fff;
 }
-/* line 148, ../sass/teststyle.scss */
+/* line 200, ../sass/teststyle.scss */
 #container #sidebar .mod-type-selector {
   border: 1px #ddd solid;
   margin: 10px;
   padding: 10px;
 }
-/* line 153, ../sass/teststyle.scss */
+/* line 205, ../sass/teststyle.scss */
 #container #sidebar h2 {
   font-size: 16px;
   margin: 0;
   padding: 5px 0 0;
 }
-/* line 157, ../sass/teststyle.scss */
+/* line 209, ../sass/teststyle.scss */
 #container #sidebar ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* line 158, ../sass/teststyle.scss */
+/* line 210, ../sass/teststyle.scss */
 #container #sidebar ul li {
   position: relative;
   margin: 0;
   padding: 0;
   border-bottom: 1px #ddd dotted;
 }
-/* line 160, ../sass/teststyle.scss */
+/* line 212, ../sass/teststyle.scss */
 #container #sidebar ul li p {
   font-size: 12px;
 }
-/* line 161, ../sass/teststyle.scss */
+/* line 213, ../sass/teststyle.scss */
 #container #sidebar ul li div.latlng {
   display: none;
   font-size: 10px;
   color: #ccc;
 }
-/* line 164, ../sass/teststyle.scss */
+/* line 216, ../sass/teststyle.scss */
 #container #sidebar ul li div.type {
   position: absolute;
   top: .75em;
@@ -162,12 +227,12 @@ h1, h2 {
   font-size: 10px;
   color: #ccc;
 }
-/* line 169, ../sass/teststyle.scss */
+/* line 221, ../sass/teststyle.scss */
 #container #sidebar ul li a {
   display: block;
   text-decoration: none;
 }
-/* line 180, ../sass/teststyle.scss */
+/* line 232, ../sass/teststyle.scss */
 #container #checklist {
   margin: 10px 0 0 0;
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
@@ -186,17 +251,17 @@ h1, h2 {
   border-right: none;
   font-family: "Open Sans";
 }
-/* line 186, ../sass/teststyle.scss */
+/* line 238, ../sass/teststyle.scss */
 #container #checklist input.checkbox {
   cursor: pointer;
   position: absolute;
   left: -9999px;
 }
-/* line 189, ../sass/teststyle.scss */
+/* line 241, ../sass/teststyle.scss */
 #container #checklist label.active {
   font-weight: 600;
 }
-/* line 191, ../sass/teststyle.scss */
+/* line 243, ../sass/teststyle.scss */
 #container #checklist label {
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
   background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
@@ -219,7 +284,7 @@ h1, h2 {
   *zoom: 1;
   *display: inline;
 }
-/* line 198, ../sass/teststyle.scss */
+/* line 250, ../sass/teststyle.scss */
 #container #checklist label:active, #container #checklist label:focus {
   color: #926D00;
   position: relative;

@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 $BASE_FONT: "monospace";
 
 $DEBUG: false;
@@ -82,6 +84,12 @@ $ALT_STACK: false; // @default: false;
   background-image: linear-gradient(top, #ffffff, #d1d1d1);
 }
 
+*::focus,
+*::active { 
+  outline: none !important;
+}
+fieldset { outline: none !important;
+}
 h2.tooltip-header { 
   font-size: 16px; 
   margin: 0; 
@@ -105,7 +113,50 @@ h1,h2 { margin: 0; padding: 0; }
   top: 20px;
   background: #efefef; 
 
+  .page-content { 
+    margin: 0 10px;
+  }
+
   div.map-container { 
+
+    div.cms_placeholder-bar {
+      //border-left: none !important;
+      //border-right: none !important; 
+      } 
+    ul.cms_placeholder-subnav { 
+      @include border-radius(0);
+      //box-shadow: 0 0 .4em rgba(0,0,0,.3);
+      border: 1px #ccc dotted;
+      li.cms_placeholder-subnav-title { 
+        ul { 
+          li.cms_placeholder-last { 
+            a { } }
+          li { 
+            @include opacity(.5);
+            &:hover { 
+              @include opacity(1); }
+            a { 
+              color: #333; 
+              font-weight: 600; 
+              text-transform: lowercase;
+              font-variant: small-caps;
+              font-size: 16px;
+              &:hover { 
+                color: #333 !important;
+                background: #fff; } } } } } }
+    li.cms_placeholder-subnav-title {
+      span { 
+        //@include panel-gradient;
+        @include border-radius(0);
+        //background: white url('../../../../images/toolbar/toolbar_bg.gif') repeat-x left bottom;
+        color: #333; 
+        font-weight: 600; 
+        text-transform: lowercase;
+        border-bottom: 1px #999 dotted;
+        font-variant: small-caps;
+        font-size: 16px;
+        text-shadow: 0 0 -1px #111; } }
+
     margin: 10px 0 0;
     h1 { 
       @include panel_gradient;
@@ -142,6 +193,7 @@ h1,h2 { margin: 0; padding: 0; }
     //height: 100%;
     border: 1px #ddd solid;
     border-left: none;
+    margin: 10px 0 0;
   }
 
   #sidebar { 
@@ -172,7 +224,7 @@ h1,h2 { margin: 0; padding: 0; }
     float: left;
     //height: 385px;
     width: 231px;
-    margin: 0 0 0 10px;
+    margin: 10px 0 0 10px;
     border: 1px #ddd solid;
     border-right: 0;
     background: #fff; }

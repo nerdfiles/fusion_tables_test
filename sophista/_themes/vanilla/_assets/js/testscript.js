@@ -307,7 +307,10 @@
           marker_id = parseInt($this.data("markerid")),
           pt = $this.attr('rel');
 
+      $this.parent().parent().siblings().removeClass('active');
+      $this.parent().parent().siblings().find('a.active').removeClass('active');
       if ( ! $this.hasClass('active') ) {
+        $this.parent().parent().addClass('active');
         $this.addClass('active');
       }
 
