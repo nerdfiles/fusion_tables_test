@@ -22,3 +22,11 @@ javascripts_dir = "javascripts"
 # preferred_syntax = :sass
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
+
+module Sass::Script::Functions
+  def reverse(string)
+    assert_type string, :String
+    Sass::Script::String.new(string.value.reverse)
+  end
+  declare :reverse, :args => [:string]
+end

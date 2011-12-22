@@ -1,33 +1,33 @@
-/* line 1, ../sass/teststyle.scss */
+/* line 7, ../sass/teststyle.scss */
 .hide {
   display: none !important;
 }
 
-/* line 2, ../sass/teststyle.scss */
+/* line 8, ../sass/teststyle.scss */
 .accessiblyHide {
   position: absolute;
   left: -9999px;
 }
 
-/* line 47, ../sass/teststyle.scss */
+/* line 85, ../sass/teststyle.scss */
 h2.tooltip-header {
   font-size: 16px;
   margin: 0;
   font-family: "Helvetica", sans-serif;
 }
 
-/* line 51, ../sass/teststyle.scss */
+/* line 89, ../sass/teststyle.scss */
 p.tooltip-desc {
   font-family: "Helvetica", sans-serif;
   font-size: 12px;
 }
 
-/* line 55, ../sass/teststyle.scss */
+/* line 93, ../sass/teststyle.scss */
 body {
   background: #efefef;
 }
 
-/* line 58, ../sass/teststyle.scss */
+/* line 96, ../sass/teststyle.scss */
 #container {
   padding: 10px 0 10px;
   border: 1px #ccc solid;
@@ -38,12 +38,12 @@ body {
   margin: 30px auto 30px;
   background: #efefef;
 }
-/* line 67, ../sass/teststyle.scss */
+/* line 105, ../sass/teststyle.scss */
 #container div.map-container {
   /* For modern browsers */
   /* For IE 6/7 (trigger hasLayout) */
 }
-/* line 68, ../sass/teststyle.scss */
+/* line 106, ../sass/teststyle.scss */
 #container div.map-container h1 {
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
   background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
@@ -68,30 +68,30 @@ body {
   line-height: 1;
   font-family: "Helvetica", sans-serif;
 }
-/* line 17, ../sass/teststyle.scss */
+/* line 55, ../sass/teststyle.scss */
 #container div.map-container:before, #container div.map-container:after {
   content: "";
   display: table;
 }
-/* line 22, ../sass/teststyle.scss */
+/* line 60, ../sass/teststyle.scss */
 #container div.map-container:after {
   clear: both;
 }
-/* line 27, ../sass/teststyle.scss */
+/* line 65, ../sass/teststyle.scss */
 #container div.map-container {
   zoom: 1;
 }
-/* line 82, ../sass/teststyle.scss */
+/* line 120, ../sass/teststyle.scss */
 #container fieldset {
   padding: 0;
   border: none;
   margin: 0;
 }
-/* line 90, ../sass/teststyle.scss */
+/* line 128, ../sass/teststyle.scss */
 #container .field-block {
   padding: 10px 20px;
 }
-/* line 95, ../sass/teststyle.scss */
+/* line 133, ../sass/teststyle.scss */
 #container #map_canvas {
   float: left;
   width: 718px;
@@ -100,7 +100,7 @@ body {
   border: 1px #ddd solid;
   border-left: none;
 }
-/* line 105, ../sass/teststyle.scss */
+/* line 143, ../sass/teststyle.scss */
 #container #sidebar {
   font-family: "Helvetica", sans-serif;
   float: left;
@@ -110,55 +110,55 @@ body {
   border-right: 0;
   background: #fff;
 }
-/* line 106, ../sass/teststyle.scss */
+/* line 144, ../sass/teststyle.scss */
 #container #sidebar .mod-type-selector {
   border: 1px #ddd solid;
   margin: 10px;
   padding: 10px;
 }
-/* line 111, ../sass/teststyle.scss */
+/* line 149, ../sass/teststyle.scss */
 #container #sidebar h2 {
   font-size: 16px;
   margin: 0;
   padding: 5px 0 0;
 }
-/* line 115, ../sass/teststyle.scss */
+/* line 153, ../sass/teststyle.scss */
 #container #sidebar ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* line 116, ../sass/teststyle.scss */
+/* line 154, ../sass/teststyle.scss */
 #container #sidebar ul li {
   position: relative;
   margin: 0;
   padding: 0;
   border-bottom: 1px #ddd dotted;
 }
-/* line 118, ../sass/teststyle.scss */
+/* line 156, ../sass/teststyle.scss */
 #container #sidebar ul li p {
   font-size: 12px;
 }
-/* line 119, ../sass/teststyle.scss */
+/* line 157, ../sass/teststyle.scss */
 #container #sidebar ul li div.latlng {
   display: none;
   font-size: 10px;
-  color: #999;
+  color: #ccc;
 }
-/* line 122, ../sass/teststyle.scss */
+/* line 160, ../sass/teststyle.scss */
 #container #sidebar ul li div.type {
   position: absolute;
   top: .75em;
   right: 0;
   font-size: 10px;
-  color: #999;
+  color: #ccc;
 }
-/* line 127, ../sass/teststyle.scss */
+/* line 165, ../sass/teststyle.scss */
 #container #sidebar ul li a {
   display: block;
   text-decoration: none;
 }
-/* line 138, ../sass/teststyle.scss */
+/* line 176, ../sass/teststyle.scss */
 #container #checklist {
   margin: 10px 0 0 0;
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
@@ -175,19 +175,19 @@ body {
   border: 1px #ddd solid;
   border-left: none;
   border-right: none;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Open Sans";
 }
-/* line 144, ../sass/teststyle.scss */
+/* line 182, ../sass/teststyle.scss */
 #container #checklist input.checkbox {
   cursor: pointer;
   position: absolute;
   left: -9999px;
 }
-/* line 147, ../sass/teststyle.scss */
+/* line 185, ../sass/teststyle.scss */
 #container #checklist label.active {
   font-weight: 600;
 }
-/* line 149, ../sass/teststyle.scss */
+/* line 187, ../sass/teststyle.scss */
 #container #checklist label {
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
   background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
@@ -210,7 +210,7 @@ body {
   *zoom: 1;
   *display: inline;
 }
-/* line 156, ../sass/teststyle.scss */
+/* line 194, ../sass/teststyle.scss */
 #container #checklist label:active, #container #checklist label:focus {
   color: #926D00;
   position: relative;

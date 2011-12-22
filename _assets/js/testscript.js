@@ -79,7 +79,7 @@
   var latlng = new google.maps.LatLng(31.22, 29.85);
   var myOptions = {
     center: latlng,
-    zoom: 11,
+    zoom: 13,
     streetViewControl: false,
     zoomControl: true,
     zoomControlOptions:{
@@ -88,7 +88,6 @@
     },
     scaleControl: false,
     panControl: false,
-    center: latlng,
     styles: alexMapStyle,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -152,7 +151,7 @@
 
     $sidebar.trigger('loadLayer', [response]);
     
-    $mapCanvas.delay(300).height($sidebar.height());
+    $mapCanvas.height($sidebar.height());
 
   } // End getData
 
@@ -277,6 +276,7 @@
           $mapCanvas.gmap('addInfoWindow', { 'content': htmlInfoWindowContent }, function(iw) {
             $(new_marker).click(function() {
               iw.open(map, new_marker);
+              $('.tooltip-header').trigger('load_scaffolding');
             });
           });
 
@@ -313,9 +313,25 @@
         if ( DEBUG ) {
           console.log(marker_id);
         }
-        google.maps.event.trigger(gmarkers[marker_id], 'click')
+        google.maps.event.trigger(gmarkers[marker_id], 'click');
+        $('.tooltip-header').trigger('load_scaffolding');
       }
       
+    });
+
+  });
+
+  $('.tooltip-header').bind('load_scaffolding', function(e) {
+
+    $(this).each(function(e) {
+    
+      var $this = $(this);
+          $tt_lining = $this.parent(),
+          $tt_inner = $tt_lining.parent(),
+          $tt_container = $tt_lining.parent();
+
+      $tt_container.addClass('mod');
+
     });
 
   });

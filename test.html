@@ -1,13 +1,11 @@
 ﻿<!DOCTYPE html>
 
-<!--[if lt IE 7]><html class="ie6 no-js" lang="en"><![endif]-->
-<!--[if IE 7]><html class="ie7 no-js" lang="en"><![endif]-->
-<!--[if IE 8]><html class="ie8 no-js" lang="en"><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if lte IE 8 ]> <html lang="en" class="no-js oldie"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 
 <head>
   
-  <meta charset="utf-8" /><!-- == charset first == -->
+  <meta charset="utf-8" />
 
   <!-- ==
   
@@ -36,15 +34,30 @@
     content="" />
 
   <!-- ==
+
+  pre-cache
+
+  == -->
+
+  <meta
+    name="pre-cache"
+    content="http://fonts.googleapis.com" />
+
+  <!-- ==
   
   custom fonts
 
   == -->
 
   <link 
+    href='http://fonts.googleapis.com/css?family=Open+Sans:300' 
+    rel='stylesheet'  
+    type='text/css' />
+
+  <link 
     href='http://fonts.googleapis.com/css?family=Raleway:100' 
     rel='stylesheet' 
-    type='text/css'>  
+    type='text/css' />  
 
   <!-- ==
   
@@ -52,6 +65,9 @@
 
   == -->
 
+  <link 
+    rel="stylesheet" 
+    href="_assets/css/compass/stylesheets/reset.css" /> 
   <link 
     rel="stylesheet" 
     href="_assets/css/compass/stylesheets/teststyle.css" /> 
@@ -64,8 +80,6 @@
 
   <script src="http://www.google.com/jsapi"></script>
   <script>
-    // == goog.viz =================================== //
-
     google.load( 'visualization', '1', 
       { 'packages': [ 'corechart', 'table', 'geomap' ] } );
   </script>  
@@ -184,6 +198,11 @@
       }
     ]);
   </script>
+
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+    <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+  <![endif]-->
 
 </body>
 </html>

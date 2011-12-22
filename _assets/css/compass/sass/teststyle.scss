@@ -1,10 +1,48 @@
+$BASE_FONT: "monospace";
+
+$DEBUG: false;
+$BACKUP_FONT: false;
+$ALT_STACK: false; // @default: false;
+
 .hide { display: none !important; }
 .accessiblyHide { position: absolute; left: -9999px; }
 
 @mixin small-font() {
   font-size: 10px;
-  color: #999;
+  color: #ccc;
 }
+
+@function __font__set($family) {
+  
+  $fs: $BASE_FONT;
+
+  $fs: Helvetica, sans-serif;
+
+  @if $family != "" and $family != false {
+    $fs: $family;
+  }
+  
+  @if $BACKUP_FONT == true {
+    $fs: sans-serif;
+  }
+  
+  @if $ALT_STACK != "" and $ALT_STACK != false {
+    $fs: $ALT_STACK;
+  }
+
+  @if $DEBUG == true {
+    $fs: Comic Sans;
+  }
+  
+  @return $fs;
+
+}
+
+@mixin __fs__($family) {
+  font: {
+    family: __font__set($family); 
+  }
+} 
 
 @mixin accessiblyHide() {
   position: absolute; left: -9999px;
@@ -163,5 +201,4 @@ body {
       display: inline-block;
       *zoom: 1;
       *display: inline; }
-    font: { 
-      family: "Helvetica", sans-serif; } } }
+    @include __fs__('Open Sans'); } }

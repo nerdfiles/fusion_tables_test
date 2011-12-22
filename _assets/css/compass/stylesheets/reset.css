@@ -1,0 +1,535 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* =============================================================================
+   HTML5 element display
+   ========================================================================== */
+/* line 13, ../sass/reset.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+  display: block;
+}
+
+/* line 16, ../sass/reset.scss */
+audio[controls], canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+/*
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ *    http://clagnut.com/blog/348/#c790
+ * 2. Force vertical scrollbar in non-IE
+ * 3. Remove Android and iOS tap highlight color to prevent entire container being highlighted
+ *    www.yuiblog.com/blog/2010/10/01/quick-tip-customizing-the-mobile-safari-tap-highlight-color/
+ * 4. Prevent iOS text size adjust on device orientation change, without disabling user zoom
+ *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ */
+/* line 35, ../sass/reset.scss */
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* line 43, ../sass/reset.scss */
+body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.231;
+  font-family: sans-serif;
+  color: #222;
+}
+
+/* line 50, ../sass/reset.scss */
+button, input, select, textarea {
+  font-family: sans-serif;
+  color: #222;
+}
+
+/* 
+ * These selection declarations have to be separate
+ * No text-shadow: twitter.com/miketaylr/status/12228805301
+ * Also: hot pink!
+ */
+/* line 60, ../sass/reset.scss */
+::-moz-selection {
+  background: #fe57a1;
+  color: #fff;
+  text-shadow: none;
+}
+
+/* line 65, ../sass/reset.scss */
+::selection {
+  background: #fe57a1;
+  color: #fff;
+  text-shadow: none;
+}
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+/* line 74, ../sass/reset.scss */
+a {
+  color: #00e;
+}
+/* line 76, ../sass/reset.scss */
+a:visited {
+  color: #551a8b;
+}
+/* line 78, ../sass/reset.scss */
+a:focus {
+  outline: thin dotted;
+}
+/* line 80, ../sass/reset.scss */
+a:hover, a:active {
+  outline: 0;
+}
+
+/* Improve readability when focused and hovered in all browsers: people.opera.com/patrickl/experiments/keyboard/test */
+/* =============================================================================
+   Typography
+   ========================================================================== */
+/* line 89, ../sass/reset.scss */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 92, ../sass/reset.scss */
+b, strong {
+  font-weight: bold;
+}
+
+/* line 95, ../sass/reset.scss */
+blockquote {
+  margin: 1em 40px;
+}
+
+/* line 98, ../sass/reset.scss */
+dfn {
+  font-style: italic;
+}
+
+/* line 101, ../sass/reset.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/* line 109, ../sass/reset.scss */
+ins {
+  background: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* line 114, ../sass/reset.scss */
+mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* Redeclare monospace font family: en.wikipedia.org/wiki/User:Davidgothberg/Test59 */
+/* line 122, ../sass/reset.scss */
+pre, code, kbd, samp {
+  font-family: monospace, monospace;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+
+/* Improve readability of pre-formatted text in all browsers */
+/* line 129, ../sass/reset.scss */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 134, ../sass/reset.scss */
+q {
+  quotes: none;
+}
+/* line 136, ../sass/reset.scss */
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+/* line 140, ../sass/reset.scss */
+small {
+  font-size: 85%;
+}
+
+/* Position subscript and superscript content without affecting line-height: gist.github.com/413930 */
+/* line 145, ../sass/reset.scss */
+sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 151, ../sass/reset.scss */
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+
+/* line 158, ../sass/reset.scss */
+sub {
+  bottom: -0.25em;
+}
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+/* line 165, ../sass/reset.scss */
+ul, ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px;
+}
+
+/* line 169, ../sass/reset.scss */
+dd {
+  margin: 0 0 0 40px;
+}
+
+/* line 173, ../sass/reset.scss */
+nav ul, nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+/*
+ * Improve image quality when scaled in IE7
+ * code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ */
+/* line 187, ../sass/reset.scss */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+/*
+ * Correct overflow displayed oddly in IE9 
+ */
+/* line 195, ../sass/reset.scss */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+/* line 202, ../sass/reset.scss */
+figure, form {
+  margin: 0;
+}
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+/* line 209, ../sass/reset.scss */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+ * 1. Correct color not inheriting in IE6/7/8/9 
+ * 2. Correct alignment displayed oddly in IE6/7 
+ */
+/* line 219, ../sass/reset.scss */
+legend {
+  border: 0;
+  *margin-left: -7px;
+  padding: 0;
+}
+
+/* Indicate that 'label' will shift focus to the associated form element */
+/* line 226, ../sass/reset.scss */
+label {
+  cursor: pointer;
+}
+
+/*
+ * 1. Correct font-size not inheriting in all browsers
+ * 2. Remove margins in FF3/4 S5 Chrome
+ * 3. Define consistent vertical alignment display in all browsers
+ */
+/* line 235, ../sass/reset.scss */
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+
+/*
+ * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ * 2. Correct inner spacing displayed oddly in IE6/7
+ */
+/* line 246, ../sass/reset.scss */
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+
+/*
+ * 1. Display hand cursor for clickable form elements
+ * 2. Allow styling of clickable form elements in iOS
+ */
+/* line 255, ../sass/reset.scss */
+button {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+
+/* line 260, ../sass/reset.scss */
+input[type="button"], input[type="reset"], input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+/* line 263, ../sass/reset.scss */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+}
+/* line 265, ../sass/reset.scss */
+input[type="search"] {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/*
+ * Consistent box sizing and appearance
+ */
+/* 
+ * Remove inner padding and border in FF3/4
+ * www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ 
+ */
+/* line 279, ../sass/reset.scss */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* Remove default vertical scrollbar in IE6/7/8/9 */
+/* line 285, ../sass/reset.scss */
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+/* Colors for form validity */
+/* line 293, ../sass/reset.scss */
+input:invalid, textarea:invalid {
+  background-color: #f0dddd;
+}
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+/* line 300, ../sass/reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* =============================================================================
+   Primary styles
+   Author: 
+   ========================================================================== */
+/* =============================================================================
+   Non-semantic helper classes
+   Please define your styles before this section.
+   ========================================================================== */
+/* For image replacement */
+/* line 316, ../sass/reset.scss */
+.ir {
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+}
+/* line 323, ../sass/reset.scss */
+.ir br {
+  display: none;
+}
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+/* line 329, ../sass/reset.scss */
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden */
+/* line 336, ../sass/reset.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/* line 346, ../sass/reset.scss */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+/* Hide visually and from screenreaders, but maintain layout */
+/* line 358, ../sass/reset.scss */
+.invisible {
+  visibility: hidden;
+}
+
+/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */
+/* line 363, ../sass/reset.scss */
+.clearfix {
+  zoom: 1;
+}
+/* line 364, ../sass/reset.scss */
+.clearfix:before {
+  content: "";
+  display: table;
+}
+/* line 367, ../sass/reset.scss */
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* =============================================================================
+   PLACEHOLDER Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 480px) {
+  /* Style adjustments for viewports 480px and over go here */
+}
+@media only screen and (min-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+}
+/* =============================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+@media print {
+  /* line 391, ../sass/reset.scss */
+  * {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  /* Black prints faster: sanbeiji.com/archives/953 */
+  /* line 398, ../sass/reset.scss */
+  a {
+    color: #444 !important;
+    text-decoration: underline;
+  }
+  /* line 401, ../sass/reset.scss */
+  a:visited {
+    color: #444 !important;
+    text-decoration: underline;
+  }
+  /* line 404, ../sass/reset.scss */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  /* line 406, ../sass/reset.scss */
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /* line 408, ../sass/reset.scss */
+  .ir a:after {
+    content: "";
+  }
+
+  /* line 411, ../sass/reset.scss */
+  a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+
+  /* Don't show links for images, or javascript/internal links */
+  /* line 414, ../sass/reset.scss */
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  /* line 417, ../sass/reset.scss */
+  thead {
+    display: table-header-group;
+  }
+
+  /* css-discuss.incutio.com/wiki/Printing_Tables */
+  /* line 420, ../sass/reset.scss */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* line 422, ../sass/reset.scss */
+  img {
+    page-break-inside: avoid;
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+}
+
+  /* line 428, ../sass/reset.scss */
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* line 431, ../sass/reset.scss */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}
