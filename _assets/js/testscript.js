@@ -13,6 +13,7 @@
   var map, FTresponse, geocoder;
   var $mapCanvas;
   var $sidebar = $('#sidebar');
+  var $typecontrols = $('.field-settype');
   var some_layer;
   var info_window;
   var query = "";
@@ -21,6 +22,8 @@
   var mrkr_array = [];
   var gmarkers = [];
   var global_suppressInfoWindows = false;
+  var sidebarEnabled = true;
+  var descCharLimit = 40;
 
 
   // == DEBUG =================================== //
@@ -96,6 +99,9 @@
   var queryText = encodeURIComponent("SELECT 'Name', 'Lat', 'Description', 'Type' FROM " + Marker_TableID );
   var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
 
+  var type_queryText = encodeURIComponent("SELECT 'Type' FROM " + Marker_TableID);
+  var type_query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + type_queryText);
+
 
   // == FUNCTIONS: NOM =================================== //
   
@@ -145,6 +151,24 @@
     var FTresponse = response;
 
     $sidebar.trigger('loadLayer', [response]);
+    
+    $mapCanvas.delay(300).height($sidebar.height());
+
+  } // End getData
+
+  function typeControlsData(response) {
+
+    if (!response) {
+      alert('no response');
+      return false;
+    }
+
+    if (response.isError()) {
+      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return false;
+    }
+
+    $typecontrols.trigger('loadLayer', [response]);
 
   }
 
@@ -152,6 +176,59 @@
 
   $mapCanvas = $('#map_canvas');
 
+  var htmlTypeContent = ['<ul>'];
+
+  // clear markers
+  $sidebar.find('.clearmarkers').bind('click', function(e) {
+    e.preventDefault();
+    $mapCanvas.gmap('clear', 'markers');
+  });
+
+  // typecontrols
+  $typecontrols.bind('loadLayer', function(e, response) {
+    var $this = $(this),
+        _res = response;
+        _tbl = _res.getDataTable(),
+        _row_count = _tbl.getNumberOfRows();
+    var type;
+
+    if ( DEBUG ) {
+      console.log( typeof( _tbl ) );
+      console.log( _tbl );
+    }
+
+    if ( $this.find('input').length === 0 ) {
+      for (var i = 0; i < _row_count; i++) {
+        type = _tbl.getValue(i, 0);
+        if ( $this.find('input.'+type).length === 0 )
+          $this.append('<input type="checkbox" value="'+type+'" name="type" class="checkbox '+type+' active" id="type-'+type+'" checked="checked" /><label for="type-'+type+'" class="active">'+type+'</label>');
+      }
+    }
+  });
+
+  $('input.checkbox').live('change', function(e) {
+    var $this = $(this),
+        type = $this.val();
+
+    if ( DEBUG ) {
+      console.log( $sidebar.find('.'+type).length );
+    }
+    
+    if ( ! $this.attr('checked') ) {
+      $this.next().removeClass('active');
+      $sidebar.find('.'+type).parent().parent().addClass('hide');
+    } else {
+      // the label
+      $this.next().addClass('active');
+      $sidebar.find('.'+type).parent().parent().removeClass('hide');
+    }
+
+    $sidebar.find('.'+type).siblings().removeClass('active');
+    if ( ! $sidebar.find('.'+type).hasClass('active') )
+      $sidebar.find('.'+type).parent().parent().addClass('active');
+  });
+
+  // sidebar
   $sidebar.bind('loadLayer', function(e, response) {
     var $this = $(this);
     var _res = response;
@@ -160,6 +237,9 @@
     var _col_count = _tbl.getNumberOfColumns();
     var _col_label = _tbl.getColumnLabel(0);
     var name, pt, desc, type;
+    var htmlSidebarContent = [];
+
+    htmlSidebarContent[0] = "<ul>";
 
     for (var i = 0; i < _row_count; i++) {
       var id = i;
@@ -168,65 +248,56 @@
           lat = pt.split(',')[0],
           lng = pt.split(',')[1];
       var latLng = new google.maps.LatLng(lat, lng);
-      desc = _tbl.getValue(i, 2);
+      desc = _tbl.getValue(i, 2).substr(0, descCharLimit) + " ...";
       type = _tbl.getValue(i, 3);
+      var sidebarContent = "";
 
       $mapCanvas.gmap('addMarker', { 'position': pt, 'bounds': true }, function(map, marker) {
 
-        $sidebar.find('.inner').append("<h2><a data-markerid='"+id+"' rel='"+pt+"' href='#markerid-"+id+"'>"+name+"</a></h2>");
+        // sidebar content
+        var sidebarContent = "<li><h2><a data-markerid='"+id+"' class='"+type+"' rel='"+pt+"' href='#markerid-"+id+"'>"+name+"</a></h2><p>"+desc+"</p><div class='type'>"+type+"</div><div class='latlng'>"+pt+"</div></li>";
+        htmlSidebarContent[(i+1)] = sidebarContent;
         
-        var html = "<h2>"+name+"</h2>";
+        // html info window content
+        var htmlInfoWindowContent = "<h2 class='tooltip-header'>"+name+"</h2><p class='tooltip-desc'>"+desc+"</p>";
 
+        // new marker
         var new_marker = new google.maps.Marker({
-          content: html,
+          content: htmlInfoWindowContent,
           position: latLng,
           map: map  
         });
 
+        // add marker to global list
         gmarkers.push(new_marker);
 
-        $mapCanvas.gmap('addInfoWindow', { 'content': html }, function(iw) {
-          $(new_marker).click(function() {
-            iw.open(map, new_marker);
+        if ( sidebarEnabled ) {
+          
+          // add a tool tip window instead of just activate
+          $mapCanvas.gmap('addInfoWindow', { 'content': htmlInfoWindowContent }, function(iw) {
+            $(new_marker).click(function() {
+              iw.open(map, new_marker);
+            });
           });
-        });
+
+        } else {
+
+          // activate a tool tip window instead of add
+          $mapCanvas.gmap('addMarker', { 'position': pt, 'bounds': true } ).click(function() {
+            $mapCanvas.gmap('openInfoWindow', { 'content': htmlInfoWindowContent }, this);
+          });
+
+        }
+
 
       });
 
-      //$mapCanvas.gmap('addMarker', { 'position': pt, 'bounds': true } ).click(function() {
-        //console.log(pt);
-        //$mapCanvas.gmap('openInfoWindow', , this);
-      //});
+      //htmlSidebarContent[-1] = "</ul>";
+      htmlSidebarContent[(htmlSidebarContent.length+1)] = "</ul>";
+
+      $sidebar.find('.inner').html(htmlSidebarContent.join(""));
 
     }
-
-    //$this.find('.mod-type-selector .inner').append( html.join("") );
-
-    /*
-    $this.find('.mod-type-selector .inner a').each(function(e) {
-      var $this = $(this);
-      var pt = $this.attr('rel'),
-          lat = pt.split(',')[0],
-          lng = pt.split(',')[1];
-      var latLng = new google.maps.LatLng(lat, lng);
-
-      $mapCanvas.gmap('addMarker', { 'position': pt, 'bounds': true }, function(map, marker) {
-        
-        var new_marker = new google.maps.Marker({
-          position: latLng,
-          map: map  
-        });
-
-        gmarkers.push(new_marker);
-
-        $mapCanvas.gmap('addInfoWindow', { 'content': 'hullo' }, function(iw) {
-          $(new_marker).click(function() {
-            iw.open(map, new_marker);
-          });
-        });
-      });
-    });
-    */
 
     $this.find('.mod-type-selector .inner a').live('click.loadInfoWindow', function(e) {
       e.preventDefault();
@@ -251,16 +322,6 @@
   
   $mapCanvas.gmap(myOptions).bind('init', function(e, map) {
    
-    /*
-    $mapCanvas.gmap(
-        'loadFusion', 
-          { 
-            'query': { 
-              'select': 'Lat', 
-              'from': Marker_TableID, 
-              'where': 'Type LIKE "Eat"' } } );
-    */
-    
     // info_window 
 
     info_window = new google.maps.InfoWindow();
@@ -289,38 +350,13 @@
     //some_layer.setMap(map);
 
     query.send(getData);
-
-    //$mapCanvas.gmap('clear', 'markers');
+    type_query.send(typeControlsData);
 
   });
 
   // == TEST CALL =================================== //
 
   //console.log( query.send(getDataDiag) );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       
 })(jQuery);
