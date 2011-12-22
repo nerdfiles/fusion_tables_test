@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿{% load cms_tags sekizai_tags %}
+<!doctype html>
+
+<!DOCTYPE html>
 
 <!--[if lte IE 8 ]> <html lang="en" class="no-js oldie"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
@@ -22,7 +25,7 @@
 
   == -->
 
-  <title>Alex Map</title>
+  <title>Alex Map {{ request.current_page.get_title }}</title>
   <meta 
     name="description" 
     content="" />
@@ -65,6 +68,7 @@
 
   == -->
 
+  {% render_block "css" %}
   <link 
     rel="stylesheet" 
     href="_assets/css/compass/stylesheets/reset.css" /> 
@@ -111,6 +115,8 @@
 
 <body id="maptest"> 
 
+  {% cms_toolbar %}
+
   <div id="container">
     
     <div class="line-separator"></div>
@@ -118,7 +124,9 @@
     <div class="map-container">
 
       <h1>Map test</h1>
-      
+
+      {% placeholder "page content" %}
+
       <div id="map_canvas"></div><!-- End .map_canvas -->
 
       <div id="sidebar">
@@ -167,6 +175,8 @@
     </form><!-- End #checklist -->
 
   </div><!-- End #container -->
+
+  {% render_block "js" %}
 
   <script>
     Modernizr.load([

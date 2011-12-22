@@ -76,11 +76,13 @@
 
   // == MAP SETTINGS =================================== //
 
-  var latlng = new google.maps.LatLng(31.22, 29.85);
-  var myOptions = {
+  //var latlng = new google.maps.LatLng(31.22, 29.85);
+  var latlng = new google.maps.LatLng(31.292212, 29.94237);
+  var defaults = {
     center: latlng,
-    zoom: 13,
+    zoom: 12,
     streetViewControl: false,
+    mapTypeControl: true,
     zoomControl: true,
     zoomControlOptions:{
         style: google.maps.ZoomControlStyle.DEFAULT,
@@ -336,7 +338,7 @@
 
   });
   
-  $mapCanvas.gmap(myOptions).bind('init', function(e, map) {
+  $mapCanvas.gmap(defaults).bind('init', function(e, map) {
    
     // info_window 
 

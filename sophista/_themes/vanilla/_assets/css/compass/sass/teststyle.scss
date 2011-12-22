@@ -92,17 +92,21 @@ p.tooltip-desc {
 
 body {
   background: #efefef; }
+h1,h2 { margin: 0; padding: 0; }
 
 #container { 
-  padding: 10px 0 10px;
   border: 1px #ccc solid;
   box-shadow: 0 0 .5em rgba(200,200,200,.6);
   width: 960px;
   width: 733px; /* dunno? */
-  margin: 30px auto 30px;
+  padding: 0 0 0;
+  margin: 0 auto 30px;
+  position: relative;
+  top: 20px;
   background: #efefef; 
 
   div.map-container { 
+    margin: 10px 0 0;
     h1 { 
       @include panel_gradient;
       border: 1px #ddd solid;

@@ -27,23 +27,32 @@ body {
   background: #efefef;
 }
 
-/* line 96, ../sass/teststyle.scss */
+/* line 95, ../sass/teststyle.scss */
+h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 97, ../sass/teststyle.scss */
 #container {
-  padding: 10px 0 10px;
   border: 1px #ccc solid;
   box-shadow: 0 0 0.5em rgba(200, 200, 200, 0.6);
   width: 960px;
   width: 733px;
   /* dunno? */
-  margin: 30px auto 30px;
+  padding: 0 0 0;
+  margin: 0 auto 30px;
+  position: relative;
+  top: 20px;
   background: #efefef;
 }
-/* line 105, ../sass/teststyle.scss */
+/* line 108, ../sass/teststyle.scss */
 #container div.map-container {
+  margin: 10px 0 0;
   /* For modern browsers */
   /* For IE 6/7 (trigger hasLayout) */
 }
-/* line 106, ../sass/teststyle.scss */
+/* line 110, ../sass/teststyle.scss */
 #container div.map-container h1 {
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
   background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
@@ -81,17 +90,17 @@ body {
 #container div.map-container {
   zoom: 1;
 }
-/* line 120, ../sass/teststyle.scss */
+/* line 124, ../sass/teststyle.scss */
 #container fieldset {
   padding: 0;
   border: none;
   margin: 0;
 }
-/* line 128, ../sass/teststyle.scss */
+/* line 132, ../sass/teststyle.scss */
 #container .field-block {
   padding: 10px 20px;
 }
-/* line 133, ../sass/teststyle.scss */
+/* line 137, ../sass/teststyle.scss */
 #container #map_canvas {
   float: left;
   width: 718px;
@@ -100,7 +109,7 @@ body {
   border: 1px #ddd solid;
   border-left: none;
 }
-/* line 143, ../sass/teststyle.scss */
+/* line 147, ../sass/teststyle.scss */
 #container #sidebar {
   font-family: "Helvetica", sans-serif;
   float: left;
@@ -110,42 +119,42 @@ body {
   border-right: 0;
   background: #fff;
 }
-/* line 144, ../sass/teststyle.scss */
+/* line 148, ../sass/teststyle.scss */
 #container #sidebar .mod-type-selector {
   border: 1px #ddd solid;
   margin: 10px;
   padding: 10px;
 }
-/* line 149, ../sass/teststyle.scss */
+/* line 153, ../sass/teststyle.scss */
 #container #sidebar h2 {
   font-size: 16px;
   margin: 0;
   padding: 5px 0 0;
 }
-/* line 153, ../sass/teststyle.scss */
+/* line 157, ../sass/teststyle.scss */
 #container #sidebar ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* line 154, ../sass/teststyle.scss */
+/* line 158, ../sass/teststyle.scss */
 #container #sidebar ul li {
   position: relative;
   margin: 0;
   padding: 0;
   border-bottom: 1px #ddd dotted;
 }
-/* line 156, ../sass/teststyle.scss */
+/* line 160, ../sass/teststyle.scss */
 #container #sidebar ul li p {
   font-size: 12px;
 }
-/* line 157, ../sass/teststyle.scss */
+/* line 161, ../sass/teststyle.scss */
 #container #sidebar ul li div.latlng {
   display: none;
   font-size: 10px;
   color: #ccc;
 }
-/* line 160, ../sass/teststyle.scss */
+/* line 164, ../sass/teststyle.scss */
 #container #sidebar ul li div.type {
   position: absolute;
   top: .75em;
@@ -153,12 +162,12 @@ body {
   font-size: 10px;
   color: #ccc;
 }
-/* line 165, ../sass/teststyle.scss */
+/* line 169, ../sass/teststyle.scss */
 #container #sidebar ul li a {
   display: block;
   text-decoration: none;
 }
-/* line 176, ../sass/teststyle.scss */
+/* line 180, ../sass/teststyle.scss */
 #container #checklist {
   margin: 10px 0 0 0;
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
@@ -177,17 +186,17 @@ body {
   border-right: none;
   font-family: "Open Sans";
 }
-/* line 182, ../sass/teststyle.scss */
+/* line 186, ../sass/teststyle.scss */
 #container #checklist input.checkbox {
   cursor: pointer;
   position: absolute;
   left: -9999px;
 }
-/* line 185, ../sass/teststyle.scss */
+/* line 189, ../sass/teststyle.scss */
 #container #checklist label.active {
   font-weight: 600;
 }
-/* line 187, ../sass/teststyle.scss */
+/* line 191, ../sass/teststyle.scss */
 #container #checklist label {
   background-image: -moz-linear-gradient(top, white, #d1d1d1);
   background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#d1d1d1));
@@ -210,7 +219,7 @@ body {
   *zoom: 1;
   *display: inline;
 }
-/* line 194, ../sass/teststyle.scss */
+/* line 198, ../sass/teststyle.scss */
 #container #checklist label:active, #container #checklist label:focus {
   color: #926D00;
   position: relative;
