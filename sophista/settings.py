@@ -175,6 +175,8 @@ INSTALLED_APPS = (
 
     # taxonomy/relationships
     'categories',
+    'treebeard',
+    'taggit',
 
     # file uploading
     'filer',
@@ -183,6 +185,9 @@ INSTALLED_APPS = (
     # testing
     'django_pdb',
     'test_utils',
+
+    # tools
+    'django_extensions',
 
 )
 
