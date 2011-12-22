@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
 
+# == celery
+
+import djcelery
+djcelery.setup_loader()
+
 gettext = lambda s: s
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -15,6 +20,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 LANGUAGES = [('en', 'en')]
 DEFAULT_LANGUAGE = 0
@@ -87,6 +94,9 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.toolbar.ToolbarMiddleware',
 )
 
+if DEBUG:
+  MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.i18n',
@@ -134,8 +144,10 @@ INSTALLED_APPS = (
     'treemenus',
     'menus',
 
-    # migration
+    # migration/fixtures
     'south',
+    'fixture_magic',
+    'fixture_generator',
 
     # additional content plugins
     'cms.plugins.text',
@@ -157,5 +169,23 @@ INSTALLED_APPS = (
     # testing
     'django_pdb',
     'test_utils',
+
+)
+
+INSTALLED_APPS += ("djcelery",)
+
+if DEBUG:
+  INSTALLED_APPS += ("debug_toolbar",)
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
 )
 

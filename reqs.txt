@@ -10,13 +10,16 @@ distribute==0.6.19
 django-celery==2.4.2
 django-classy-tags==0.3.4.1
 django-cms==2.2
+django-debug-toolbar==0.8.5
 django-filer==0.8.5
+-e git+https://github.com/alex/django-fixture-generator.git@4c691342dce6e98b87ea8c19a326732ae740ceb2#egg=django_fixture_generator-dev
 django-fixture-magic==0.0.3
 django-mptt==0.5.1
 django-pdb==0.1.2
 django-picklefield==0.1.9
 django-sekizai==0.5
 django-test-utils==0.3
+django-treemenus==0.8.7
 easy-thumbnails==1.0-alpha-21
 html5lib==0.90
 kombu==1.5.1
