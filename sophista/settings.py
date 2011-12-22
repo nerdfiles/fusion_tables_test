@@ -177,6 +177,7 @@ INSTALLED_APPS = (
     'categories',
     'treebeard',
     'taggit',
+    'cms_taggit',
 
     # file uploading
     'filer',
