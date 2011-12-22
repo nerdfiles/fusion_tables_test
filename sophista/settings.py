@@ -101,6 +101,14 @@ CMS_TEMPLATES = (
     ('test.html', 'Test Template'),
 )
 
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
@@ -108,6 +116,8 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+
+    # django core
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -115,16 +125,37 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.staticfiles',
+
+    # cms
     'cms',
-    'menus',
     'mptt',
+    
+    # menus
+    'treemenus',
+    'menus',
+
+    # migration
     'south',
+
+    # additional content plugins
     'cms.plugins.text',
     'cms.plugins.picture',
     'cms.plugins.link',
     'cms.plugins.file',
     'cms.plugins.snippet',
     'cms.plugins.googlemap',
+
+    # templating/frontend
     'sekizai',
+
+    # taxonomy/relationships
+    'categories',
+
+    # file uploading
+    'filer',
+
+    # testing
+    'django_pdb',
+    'test_utils',
 )
 

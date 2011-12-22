@@ -9,6 +9,10 @@ urlpatterns = patterns('',
     url(r'^', include('cms.urls')),
 )
 
+urlpatterns += patterns('',
+    url(r'^', include('filer.server.urls')),
+)
+
 if settings.LOCAL_DEVELOPMENT:
     urlpatterns = patterns('',
         url(r'^_assets/(?P<path>.*)$', 'django.views.static.serve',
