@@ -76,13 +76,11 @@
 
   // == MAP SETTINGS =================================== //
 
-  //var latlng = new google.maps.LatLng(31.22, 29.85);
-  var latlng = new google.maps.LatLng(31.292212, 29.94237);
-  var defaults = {
+  var latlng = new google.maps.LatLng(31.22, 29.85);
+  var myOptions = {
     center: latlng,
-    zoom: 12,
+    zoom: 11,
     streetViewControl: false,
-    mapTypeControl: true,
     zoomControl: true,
     zoomControlOptions:{
         style: google.maps.ZoomControlStyle.DEFAULT,
@@ -90,18 +88,10 @@
     },
     scaleControl: false,
     panControl: false,
+    center: latlng,
     styles: alexMapStyle,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-
-
-  // == DEFAULT QUERY =================================== //
-
-  var queryText = encodeURIComponent("SELECT 'Name', 'Lat', 'Description', 'Type' FROM " + Marker_TableID );
-  var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-
-  var type_queryText = encodeURIComponent("SELECT 'Type' FROM " + Marker_TableID);
-  var type_query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + type_queryText);
 
 
   // == FUNCTIONS: NOM =================================== //
@@ -153,7 +143,7 @@
 
     $sidebar.trigger('loadLayer', [response]);
     
-    $mapCanvas.height($sidebar.height());
+    $mapCanvas.delay(300).height($sidebar.height());
 
   } // End getData
 
@@ -243,7 +233,9 @@
     htmlSidebarContent[0] = "<ul>";
 
     for (var i = 0; i < _row_count; i++) {
+      
       var id = i;
+      
       name = _tbl.getValue(i, 0);
       pt = _tbl.getValue(i, 1),
           lat = pt.split(',')[0],
@@ -251,13 +243,14 @@
       var latLng = new google.maps.LatLng(lat, lng);
       desc = _tbl.getValue(i, 2).substr(0, descCharLimit) + " ...";
       type = _tbl.getValue(i, 3);
+
       var sidebarContent = "";
 
       $mapCanvas.gmap('addMarker', { 'position': pt, 'bounds': true }, function(map, marker) {
 
         // sidebar content
         var sidebarContent = "<li><h2><a data-markerid='"+id+"' class='"+type+"' rel='"+pt+"' href='#markerid-"+id+"'>"+name+"</a></h2><p>"+desc+"</p><div class='type'>"+type+"</div><div class='latlng'>"+pt+"</div></li>";
-        htmlSidebarContent[(i+1)] = sidebarContent;
+        htmlSidebarContent[(i+1)] = sidebarContent; // same as array.push([(i+1))
         
         // html info window content
         var htmlInfoWindowContent = "<h2 class='tooltip-header'>"+name+"</h2><p class='tooltip-desc'>"+desc+"</p>";
@@ -278,7 +271,6 @@
           $mapCanvas.gmap('addInfoWindow', { 'content': htmlInfoWindowContent }, function(iw) {
             $(new_marker).click(function() {
               iw.open(map, new_marker);
-              $('.tooltip-header').trigger('load_scaffolding');
             });
           });
 
@@ -292,7 +284,7 @@
         }
 
 
-      });
+      }); // End addMarker
 
       //htmlSidebarContent[-1] = "</ul>";
       htmlSidebarContent[(htmlSidebarContent.length+1)] = "</ul>";
@@ -307,10 +299,7 @@
           marker_id = parseInt($this.data("markerid")),
           pt = $this.attr('rel');
 
-      $this.parent().parent().siblings().removeClass('active');
-      $this.parent().parent().siblings().find('a.active').removeClass('active');
       if ( ! $this.hasClass('active') ) {
-        $this.parent().parent().addClass('active');
         $this.addClass('active');
       }
 
@@ -318,30 +307,22 @@
         if ( DEBUG ) {
           console.log(marker_id);
         }
-        google.maps.event.trigger(gmarkers[marker_id], 'click');
-        $('.tooltip-header').trigger('load_scaffolding');
+        google.maps.event.trigger(gmarkers[marker_id], 'click')
       }
       
     });
 
   });
+ 
+  // == DEFAULT QUERY =================================== //
 
-  $('.tooltip-header').bind('load_scaffolding', function(e) {
+  var queryText = encodeURIComponent("SELECT 'Name', 'Lat', 'Description', 'Type' FROM " + Marker_TableID );
+  var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
 
-    $(this).each(function(e) {
-    
-      var $this = $(this);
-          $tt_lining = $this.parent(),
-          $tt_inner = $tt_lining.parent(),
-          $tt_container = $tt_lining.parent();
+  var type_queryText = encodeURIComponent("SELECT 'Type' FROM " + Marker_TableID);
+  var type_query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + type_queryText);
 
-      $tt_container.addClass('mod');
-
-    });
-
-  });
-  
-  $mapCanvas.gmap(defaults).bind('init', function(e, map) {
+  $mapCanvas.gmap(myOptions).bind('init', function(e, map) {
    
     // info_window 
 
@@ -371,6 +352,7 @@
     //some_layer.setMap(map);
 
     query.send(getData);
+
     type_query.send(typeControlsData);
 
   });
@@ -381,5 +363,6 @@
 
       
 })(jQuery);
+
 
 
